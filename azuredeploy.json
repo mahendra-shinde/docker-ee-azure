@@ -21,7 +21,7 @@
             "metadata": {
                 "description": "The base URI where artifacts required by this template are located including a trailing '/'"
             },
-            "defaultValue": "[deployment().properties.templateLink.uri]"
+            "defaultValue": "https://raw.githubusercontent.com/mahendra-shinde/docker-ee-azure/main/"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -65,7 +65,7 @@
     },
     "functions": [],
     "variables": {
-        "scriptParams": "[concat(parameters('adminUser'),' ',parameters('adminPassword'),' ',parameters('cluster-dns-prefix'),parameters('location'),'cloudapp.azure.com')]",
+        "scriptParams": "[concat(parameters('adminUser'),' ',parameters('adminPassword'),' ',parameters('cluster-dns-prefix'),'.',parameters('location'),'.cloudapp.azure.com')]",
         "scriptUrl": "[uri(parameters('_artifactsLocation'),concat('/scripts/docker-ee-install.sh', parameters('_artifactsLocationSasToken')))]",
         "scriptCmd": "[concat('sh docker-ee-install.sh  ',variables('scriptParams'))]"
     },
