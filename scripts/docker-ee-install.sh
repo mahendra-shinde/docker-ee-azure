@@ -7,7 +7,7 @@ echo "10.0.1.10 node-1" | tee -a /etc/hosts
 echo "10.0.1.11 node-2" | tee -a /etc/hosts
 
 export DEBIAN_FRONTEND=noninteractive
-curl -fsSL https://repos.mirantis.com/ubuntu/gpg | apt-key add
+wget -q -O - https://repos.mirantis.com/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://repos.mirantis.com/ubuntu  $(lsb_release -cs)  stable"
 apt update -y
 apt install docker-ee docker-ee-cli -y
