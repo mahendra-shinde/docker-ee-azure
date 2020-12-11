@@ -4,16 +4,16 @@
     "parameters": {
         "master-vm-size": {
             "type": "string",
-            "defaultValue":"Standard_D2s_v3",
+            "defaultValue": "Standard_D2s_v3",
             "metadata": {
-                "description":"Master node VM Size"
+                "description": "Master node VM Size"
             }
         },
         "worker-vm-size": {
             "type": "string",
-            "defaultValue":"Standard_D2s_v3",
-            "metadata":{
-                "description":"Worker node VM Size"
+            "defaultValue": "Standard_D2s_v3",
+            "metadata": {
+                "description": "Worker node VM Size"
             }
         },
         "_artifactsLocation": {
@@ -65,8 +65,9 @@
     },
     "functions": [],
     "variables": {
-        "scriptParams":"[concat(parameters('adminUser'),' ',parameters('adminPassword'),' ',parameters('cluster-dns-prefix'),parameters('location'),'cloudapp.azure.com')]",
-        "scriptUrl":"[uri(parameters('_artifactsLocation'),concat('/scripts/docker-ee-install.sh ',' ',variables('scriptParams'), parameters('_artifactsLocationSasToken')))]"
+        "scriptParams": "[concat(parameters('adminUser'),' ',parameters('adminPassword'),' ',parameters('cluster-dns-prefix'),parameters('location'),'cloudapp.azure.com')]",
+        "scriptUrl": "[uri(parameters('_artifactsLocation'),concat('/scripts/docker-ee-install.sh', parameters('_artifactsLocationSasToken')))]",
+        "scriptCmd": "[concat('sh docker-ee-install.sh  ',variables('scriptParams'))]"
     },
     "resources": [
         {
@@ -74,9 +75,9 @@
             "apiVersion": "2019-11-01",
             "name": "vnet1",
             "location": "[parameters('location')]",
-            "dependsOn":[
-                    "[resourceId('Microsoft.Network/networkSecurityGroups', 'master-nsg')]" ,
-                    "[resourceId('Microsoft.Network/networkSecurityGroups', 'worker-nsg')]"
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', 'master-nsg')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', 'worker-nsg')]"
             ],
             "tags": {
                 "displayName": "VirtualNetwork for Docker EE Cluster"
@@ -463,7 +464,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "sh docker-ee-install.sh"
+                    "commandToExecute": "[variables('scriptCmd')]"
                 }
             }
         },
@@ -489,7 +490,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "sh docker-ee-install.sh"
+                    "commandToExecute": "[variables('scriptCmd')]"
                 }
             }
         },
@@ -515,7 +516,7 @@
                     ]
                 },
                 "protectedSettings": {
-                    "commandToExecute": "sh docker-ee-install.sh"
+                    "commandToExecute": "[variables('scriptCmd')]"
                 }
             }
         }
