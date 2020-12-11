@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "_artifactsLocation": {
+            "value": "https://jenkinsgroupdisks.blob.core.windows.net/" 
+        },
+        "storagename": {
+            "value": "strg10299" 
+        },
+        "cluster-dns-prefix": {
+            "value": "docker-ee-1020"
+        },
+        "adminPassword": {
+            "value": "Pass@12345" 
+        },
+        "adminUser": {
+            "value": "mahendra" 
+        }
+    }
+}
