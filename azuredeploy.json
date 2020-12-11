@@ -74,6 +74,10 @@
             "apiVersion": "2019-11-01",
             "name": "vnet1",
             "location": "[parameters('location')]",
+            "dependsOn":[
+                    "[resourceId('Microsoft.Network/networkSecurityGroups', 'master-nsg')]" ,
+                    "[resourceId('Microsoft.Network/networkSecurityGroups', 'worker-nsg')]"
+            ],
             "tags": {
                 "displayName": "VirtualNetwork for Docker EE Cluster"
             },
